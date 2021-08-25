@@ -8,6 +8,8 @@ const region = process.env.AWS_BUCKET_REGION
 const accessKeyId = process.env.AWS_ACCESS_KEY
 const secretAccessKey = process.env.AWS_SECRET_KEY
 
+var isSuccess = false;
+
 const s3 = new S3({
     region,
     accessKeyId,
@@ -26,7 +28,7 @@ function uploadFile(files){
 
         s3.upload(uploadParams).promise()
     }
-    
+    return true;   
 }
 exports.uploadFile = uploadFile
 

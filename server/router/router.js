@@ -3,7 +3,7 @@ const controller = require('../controllers/controller');
 const multer = require('multer')
 const path = require('path');
 
-const { uploadFile, removeFiles } = require('../database/s3');
+const { uploadFile, removeFiles, isSuccess } = require('../database/s3');
 
 var image_Urls;
 var files;
@@ -22,9 +22,9 @@ var upload = multer({
 
 route.get('/', controller.home)
 
-route.post('/uploadImages', upload.array('images'), async (req, res)=>{
+route.post('/uploadImages', upload.array('images',10),async (req, res)=>{
     files = req.files;
-    await uploadFile(files)
+    var isS = await uploadFile(files)
 
     const urls = req.files.map(file=>{
         return `https://realitiscoutvirtualour.s3.ap-southeast-1.amazonaws.com/${file.filename}`
@@ -32,7 +32,8 @@ route.post('/uploadImages', upload.array('images'), async (req, res)=>{
     image_Urls = urls;
     
     console.log('submited successfully');
-    res.redirect('https://360virtualtour.netlify.app/');
+    if(isS)
+        res.redirect('https://360virtualtour.netlify.app/');
 })
 
 
