@@ -9,7 +9,7 @@ var image_Urls;
 var files;
 
 const storage = multer.diskStorage({
-    destination: '../app/uploads',
+    destination: '../../app/uploads',
     filename: (req, file, cb) => {
         return cb(null, `${file.fieldname}_${Date.now()}_${file.originalname.split(".")[0]}${path.extname(file.originalname)}`)
     }
