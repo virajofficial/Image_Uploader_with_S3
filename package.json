@@ -1,0 +1,29 @@
+{
+  "name": "Image_Uploader_with_S3",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/virajofficial/Image_Uploader_with_S3.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/virajofficial/Image_Uploader_with_S3/issues"
+  },
+  "homepage": "https://github.com/virajofficial/Image_Uploader_with_S3#readme",
+  "dependencies": {
+    "aws-sdk": "^2.974.0",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "multer": "^1.4.2",
+    "path": "^0.12.7"
+  }
+}

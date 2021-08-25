@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Uploader</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kanit:wght@300&display=swap');
+
+        .inputform {
+            margin: auto;
+            width: 400px;
+            border: 2px solid lightgrey;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .mb-3 {
+            font-size: 20px;
+            text-align: center;
+
+        }
+
+        h2 {
+            text-align: center;
+            font-family: 'Bebas Neue', cursive;
+            word-spacing: 4px;
+            letter-spacing: 2px;
+            margin: auto;
+            width: 400px;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .previewbar {
+            margin: 5px;
+            border: 1px solid lightgrey;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Welcome to Image Uploader</h2>
+    <div class="inputform">
+        <form method="POST" action="/uploadImages" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Select Images</label>
+                <input type="file" class="form-control" name="images" id="inpFile" multiple="multiple">
+                <button type="submit" class="btn btn-warning">Upload Image</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="previewbar">
+        <div id="preview" style="margin: 10px;"></div>
+    </div>
+
+       <!--img src="/images/43dc3afbe42801ff383dcfcf31f17f8e" alt="">-->
+    
+</body>
+
+<script>
+    function previewImages() {
+
+        var preview = document.querySelector('#preview');
+        preview.innerHTML = "";
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+
+        function readAndPreview(file) {
+
+            // Make sure `file.name` matches our extensions criteria
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else...
+
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function () {
+                var image = new Image();
+                image.height = 100;
+                image.title = file.name;
+                image.src = this.result;
+                preview.appendChild(image);
+            });
+
+            reader.readAsDataURL(file);
+
+        }
+
+    }
+
+    document.querySelector('#inpFile').addEventListener("change", previewImages);
+
+</script>
+
+</html>
