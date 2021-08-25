@@ -32,11 +32,7 @@ route.post('/uploadImages', upload.array('images'), async (req, res)=>{
     image_Urls = urls;
     
     console.log('submited successfully');
-    res.send({
-        message: "success",
-        urls: urls
-    })
-    //res.redirect('https://360virtualtour.netlify.app/');
+    res.redirect('https://360virtualtour.netlify.app/');
 })
 
 
