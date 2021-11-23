@@ -2,11 +2,13 @@ const route = require('express').Router();
 const controller = require('../controllers/controller');
 const multer = require('multer')
 const path = require('path');
+const bp = require('body-parser')
 
 const { uploadFile, removeFiles, isSuccess } = require('../database/s3');
 
 var image_Urls;
 var files;
+var picker_Value;
 
 const storage = multer.diskStorage({
     destination: '../../app/uploads',
@@ -22,8 +24,12 @@ var upload = multer({
 
 route.get('/', controller.home)
 
-route.post('/uploadImages', upload.array('images',10),async (req, res)=>{
+var urlencodedParser = bp.urlencoded({ extended: false })
+
+route.post('/uploadImages',urlencodedParser, upload.array('images',10),async (req, res)=>{
     files = req.files;
+    picker_Value = req.body.selectpicker;
+    console.log(req.body.selectpicker);
     var isS = await uploadFile(files)
 
     const urls = req.files.map(file=>{
@@ -38,8 +44,9 @@ route.post('/uploadImages', upload.array('images',10),async (req, res)=>{
 
 
 route.get('/getImage', (req, res) =>{
-    console.log(req);
-    controller.getImages(req,res,image_Urls);
+    console.log(res);
+    controller.getImages(req,res,image_Urls,picker_Value);
+    console.log(res);
 })
 
 route.get('/removeImages',async (req, res)=>{

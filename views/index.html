@@ -26,6 +26,9 @@
             text-align: center;
 
         }
+        .mb-4 {
+            width: 50%;
+        }
 
         h2 {
             text-align: center;
@@ -52,15 +55,24 @@
             border: 1px solid lightgrey;
             border-radius: 5px;
         }
+        body{
+            background-image: url("https://images.wallpaperscraft.com/image/single/room_vanity_flooring_wall_80351_1920x1080.jpg");
+        }
     </style>
 </head>
 
 <body>
-    <h2>Welcome to Image Uploader</h2>
+    <h2>Welcome to Genarate 360 Virtual Tour</h2>
     <div class="inputform">
         <form method="POST" action="/uploadImages" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Select Images</label>
+                <div class="mb-4">
+                    <select class="form-select" aria-label="Default select example" name="selectpicker">
+                        <option selected value="land">Land</option>
+                        <option value="bareland">Bare Land</option>
+                      </select>
+                </div>
                 <input type="file" class="form-control" name="images" id="inpFile" multiple="multiple">
                 <button type="submit" class="btn btn-warning">Upload Image</button>
             </div>
